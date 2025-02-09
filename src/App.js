@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MainPage from "./components/MainPage";
+import WebViewer from "./components/WebViewer";
+import ChatRouteWrapper from "./components/ChatRouteWrapper"; 
+import Header from "./components/Header";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <div className="min-h-screen flex pt-[80px]">
+        {/* Left side: Main route content */}
+        <div className="flex-1">
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/webviewer" element={<WebViewer />} />
+          </Routes>
+        </div>
+
+        {/* Right side: Chat for /webviewer */}
+        <Routes>
+          <Route
+            path="/webviewer"
+            element={
+              <div className="w-full md:w-96 border-l border-gray-200 p-4">
+                <ChatRouteWrapper />
+              </div>
+            }
+          />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
