@@ -23,7 +23,8 @@ export default function Chat({ countryCode }) {
       return;
     }
 
-    const ws = new WebSocket(`ws://localhost:8000/ws/${countryCode}`);
+    const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
+    const ws = new WebSocket(`${wsProtocol}://anonafrica.fly.dev/ws/${countryCode}`);
     websocketRef.current = ws;
 
     ws.onopen = () => {
