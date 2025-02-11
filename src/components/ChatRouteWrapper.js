@@ -1,12 +1,8 @@
-// ChatRouteWrapper.js (example)
 import { useLocation } from "react-router-dom";
-import Chat from "./Chat";
+import Chat from "../components/Chat";
 
 export default function ChatRouteWrapper() {
   const location = useLocation();
-  // Suppose you stored partnerCode in location.state
-  const { partnerCode } = location.state || {};
-
-  // Pass partnerCode as the "countryCode" prop to Chat
-  return <Chat countryCode={partnerCode} />;
+  const { partnerCode, myCode, clientId } = location.state || {};
+  return <Chat partnerCode={partnerCode} myCode={myCode} clientId={clientId} />;
 }
